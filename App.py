@@ -1,5 +1,6 @@
 import tkinter as tk
 from Features.factorial import factorial_window
+from Features.nthFibonacciValue import nth_fibonacciWindow
 
 def main_menu():
     """
@@ -21,6 +22,9 @@ def main_menu():
     factorial_button = tk.Button(frame, text="Factorial", command=open_factorial_window)
     factorial_button.grid(row=1, column=0)
 
+    factorial_button = tk.Button(frame, text="Fib(n)", command=open_nthFibonacci_window)
+    factorial_button.grid(row=1, column=1)
+
 
 def open_factorial_window():
     """
@@ -35,6 +39,15 @@ def open_factorial_window():
 
     # Load the factorial UI and pass the 'back' function
     factorial_window(frame, main_menu)
+
+def open_nthFibonacci_window():
+    # Clear the existing widgets from the frame
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+    # Load the factorial UI and pass the 'back' function
+    nth_fibonacciWindow(frame, main_menu)
+
 
 window = tk.Tk()
 window.geometry("420x420")
