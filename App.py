@@ -1,5 +1,33 @@
 import tkinter as tk
+from Features.factorial import factorial_window
 
+def main_menu():
+    """
+    Displays the main menu on the application window.
+
+    Clears any existing widgets from the frame and adds a button
+    to navigate to the factorial window.
+    """
+    for widget in frame.winfo_children():
+        widget.destroy()
+    # Add main menu content
+    factorial_button = tk.Button(frame, text="Factorial", command=open_factorial_window)
+    factorial_button.grid(row=1, column=0)
+
+
+def open_factorial_window():
+    """
+    Opens the factorial feature window.
+
+    Clears current widgets from the frame and calls the factorial_window
+    function to load the factorial UI, passing a reference to main_menu
+    as the callback for the "back" action.
+    """
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+    # Load the factorial UI and pass the 'back' function
+    factorial_window(frame, main_menu)
 
 window = tk.Tk()
 window.geometry("420x420")
@@ -8,6 +36,7 @@ window.title("App")
 frame = tk.Frame(window)
 frame.grid(row=0, column=0)
 
+main_menu()
 
 if __name__ == "__main__":
     window.mainloop()
