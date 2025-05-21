@@ -10,6 +10,13 @@ def main_menu():
     """
     for widget in frame.winfo_children():
         widget.destroy()
+
+    # Create an empty row and column for spacing
+    frame.grid_rowconfigure(0, weight=1)
+    frame.grid_rowconfigure(2, weight=1)
+    frame.grid_columnconfigure(0, weight=1)
+    frame.grid_columnconfigure(2, weight=1)
+
     # Add main menu content
     factorial_button = tk.Button(frame, text="Factorial", command=open_factorial_window)
     factorial_button.grid(row=1, column=0)
@@ -34,7 +41,11 @@ window.geometry("420x420")
 window.title("App")
 
 frame = tk.Frame(window)
-frame.grid(row=0, column=0)
+frame.grid(row=0, column=0, sticky="")
+
+# Make the frame expand and fill the window
+window.grid_rowconfigure(0, weight=1)
+window.grid_columnconfigure(0, weight=1)
 
 main_menu()
 
