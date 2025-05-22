@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from App import main_menu
 
 
 
@@ -9,7 +10,8 @@ def login():
 
     if username == "admin" and password == "password":
         messagebox.showinfo("Login Successful", "Welcome!")
-        
+
+        main_menu(frame, draw_login_form)        
 
         
     else:

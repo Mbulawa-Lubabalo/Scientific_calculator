@@ -1,8 +1,10 @@
 import tkinter as tk
 from Features.factorial import factorial_window
 from Features.nthFibonacciValue import nth_fibonacciWindow
+# from login import draw_login_form
 
-def main_menu():
+
+def main_menu(frame, back_callback):
     """
     Displays the main menu on the application window.
 
@@ -19,14 +21,24 @@ def main_menu():
     frame.grid_columnconfigure(2, weight=1)
 
     # Add main menu content
-    factorial_button = tk.Button(frame, text="Factorial", command=open_factorial_window)
+    # Add main menu content
+    factorial_button = tk.Button(
+        frame, text="Factorial",
+        command=lambda: open_factorial_window(frame, back_callback)
+    )
     factorial_button.grid(row=1, column=0)
 
-    factorial_button = tk.Button(frame, text="Fib(n)", command=open_nthFibonacci_window)
-    factorial_button.grid(row=1, column=1)
+    fib_button = tk.Button(
+        frame, text="Fib(n)",
+        command=lambda: open_nthFibonacci_window(frame, back_callback)
+    )
+    fib_button.grid(row=1, column=1)
+
+    logout_button = tk.Button(frame, text="Logout", command=back_callback)
+    logout_button.grid(row=2, column=0)  # , columnspan=2, pady=20
 
 
-def open_factorial_window():
+def open_factorial_window(frame, back_callback):
     """
     Opens the factorial feature window.
 
@@ -38,29 +50,13 @@ def open_factorial_window():
         widget.destroy()
 
     # Load the factorial UI and pass the 'back' function
-    factorial_window(frame, main_menu)
+    factorial_window(frame, lambda: main_menu(frame, back_callback))
 
-def open_nthFibonacci_window():
+
+def open_nthFibonacci_window(frame, back_callback):
     # Clear the existing widgets from the frame
     for widget in frame.winfo_children():
         widget.destroy()
 
     # Load the factorial UI and pass the 'back' function
-    nth_fibonacciWindow(frame, main_menu)
-
-
-window = tk.Tk()
-window.geometry("420x420")
-window.title("App")
-
-frame = tk.Frame(window)
-frame.grid(row=0, column=0, sticky="")
-
-# Make the frame expand and fill the window
-window.grid_rowconfigure(0, weight=1)
-window.grid_columnconfigure(0, weight=1)
-
-main_menu()
-
-if __name__ == "__main__":
-    window.mainloop()
+    nth_fibonacciWindow(frame, lambda: main_menu(frame, back_callback))
