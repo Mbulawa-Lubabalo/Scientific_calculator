@@ -22,11 +22,11 @@ class Server:
                 with conn:
                     print(f"Connected by {addr}")
                     while True:
-                        data = conn.recv(1024).decode("utf-8")
-                        # if not data:
-                        #     break
-                        # message = data.decode()
-                        print(f"Received from client: {data}")
+                        data = conn.recv(1024)
+                        if not data:
+                            break
+                        message = data.decode()
+                        print(f"Received from client: {message}")
 
                         conn.sendall(data)  # Echo back
         except KeyboardInterrupt:
